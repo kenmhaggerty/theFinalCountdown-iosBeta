@@ -19,11 +19,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbw-vb-fe4" userLabel="Timer View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbw-vb-fe4" userLabel="Timer Superview">
                                 <rect key="frame" x="0.0" y="64" width="375" height="302"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" text="17:58" textAlignment="center" lineBreakMode="clip" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="rmP-or-7EZ">
-                                        <rect key="frame" x="75" y="0.0" width="225" height="301"/>
+                                        <rect key="frame" x="84" y="0.0" width="207" height="301"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration" label="countdown"/>
                                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="300"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -31,25 +33,25 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="rmP-or-7EZ" firstAttribute="width" secondItem="bbw-vb-fe4" secondAttribute="width" multiplier="0.6" id="5wb-mI-O0D"/>
+                                    <constraint firstItem="rmP-or-7EZ" firstAttribute="width" secondItem="bbw-vb-fe4" secondAttribute="width" id="8Il-qG-qmT"/>
                                     <constraint firstItem="rmP-or-7EZ" firstAttribute="centerY" secondItem="bbw-vb-fe4" secondAttribute="centerY" id="Dhc-N9-i5m"/>
-                                    <constraint firstItem="rmP-or-7EZ" firstAttribute="width" secondItem="bbw-vb-fe4" secondAttribute="width" id="QaR-2H-SRv"/>
-                                    <constraint firstItem="rmP-or-7EZ" firstAttribute="height" secondItem="bbw-vb-fe4" secondAttribute="height" id="oUm-P7-err"/>
+                                    <constraint firstItem="rmP-or-7EZ" firstAttribute="height" secondItem="bbw-vb-fe4" secondAttribute="height" id="r17-uP-UFa"/>
                                     <constraint firstItem="rmP-or-7EZ" firstAttribute="centerX" secondItem="bbw-vb-fe4" secondAttribute="centerX" id="t8s-gI-nhH"/>
+                                    <constraint firstItem="rmP-or-7EZ" firstAttribute="width" secondItem="bbw-vb-fe4" secondAttribute="width" multiplier="0.55" id="xPQ-cE-qKk"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="QaR-2H-SRv"/>
+                                        <exclude reference="8Il-qG-qmT"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact">
                                     <mask key="constraints">
-                                        <exclude reference="5wb-mI-O0D"/>
-                                        <include reference="QaR-2H-SRv"/>
+                                        <include reference="8Il-qG-qmT"/>
+                                        <exclude reference="xPQ-cE-qKk"/>
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e9H-LX-qpR" userLabel="Picker View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e9H-LX-qpR" userLabel="Picker Superview">
                                 <rect key="frame" x="-1" y="64" width="376" height="302"/>
                                 <subviews>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4L-Ct-ROl">
@@ -80,6 +82,7 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpp-UI-sOO">
                                         <rect key="frame" x="80" y="134" width="80" height="33"/>
+                                        <accessibility key="accessibilityConfiguration" label="left button"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="j5g-XL-QXS"/>
                                         </constraints>
@@ -98,8 +101,9 @@
                                             <constraint firstAttribute="height" id="i7p-FR-dlk"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvC-Q6-to7">
-                                        <rect key="frame" x="216" y="134" width="80" height="33"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvC-Q6-to7">
+                                        <rect key="frame" x="215" y="134" width="80" height="33"/>
+                                        <accessibility key="accessibilityConfiguration" label="right button"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Pause">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -164,12 +168,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Timer" id="GXH-0Z-DV3"/>
                     <connections>
-                        <outlet property="datePicker" destination="C4L-Ct-ROl" id="hdY-yp-S7X"/>
                         <outlet property="leftButton" destination="Bpp-UI-sOO" id="n7b-h7-wPJ"/>
-                        <outlet property="pickerView" destination="e9H-LX-qpR" id="ziA-8m-7Hy"/>
+                        <outlet property="pickerSuperview" destination="e9H-LX-qpR" id="NBn-96-zo4"/>
+                        <outlet property="pickerView" destination="C4L-Ct-ROl" id="Rfw-aO-Ese"/>
                         <outlet property="rightButton" destination="kvC-Q6-to7" id="XvS-Bu-qVY"/>
                         <outlet property="timerLabel" destination="rmP-or-7EZ" id="vn7-y8-pYT"/>
-                        <outlet property="timerView" destination="bbw-vb-fe4" id="xSX-rm-tYR"/>
+                        <outlet property="timerSuperview" destination="bbw-vb-fe4" id="ScJ-kG-eLf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -179,7 +183,7 @@
         <!--Navigation Controller-->
         <scene sceneID="2D5-GC-0uk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Xc-FA-NWb" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="rootViewController" automaticallyAdjustsScrollViewInsets="NO" id="8Xc-FA-NWb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

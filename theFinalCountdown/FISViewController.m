@@ -19,18 +19,23 @@
 #define DEFAULT_TIMER_TEXT @"00:00:00"
 
 @interface FISViewController ()
-@property (nonatomic, strong) IBOutlet UIView *pickerView;
-@property (nonatomic, strong) IBOutlet UIDatePicker *datePicker;
-@property (nonatomic, strong) IBOutlet UIView *timerView;
+@property (nonatomic, strong) IBOutlet UIView *pickerSuperview;
+@property (nonatomic, strong) IBOutlet UIDatePicker *pickerView;
+@property (nonatomic, strong) IBOutlet UIView *timerSuperview;
 @property (nonatomic, strong) IBOutlet UILabel *timerLabel;
 @property (nonatomic, strong) IBOutlet UIButton *leftButton;
 @property (nonatomic, strong) IBOutlet UIButton *rightButton;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic) NSUInteger elapsedSeconds;
 - (IBAction)actionLeftButton:(UIButton *)sender;
 - (IBAction)actionRightButton:(UIButton *)sender;
 - (void)setRightButtonEnabled:(BOOL)enabled;
-- (void)showPickerView:(BOOL)show;
+- (void)startTimer;
+- (void)stopTimer;
+- (void)tick;
 + (void)setTitle:(NSString *)title forButton:(UIButton *)button;
 + (void)setTitleColor:(UIColor *)titleColor forButton:(UIButton *)button;
++ (NSString *)textForSeconds:(NSUInteger)seconds;
 @end
 
 @implementation FISViewController
@@ -39,8 +44,10 @@
 {
     [super viewDidLoad];
     
+    [self.pickerView setAccessibilityLabel:@"picker view"];
+    
     [self.timerLabel setText:DEFAULT_TIMER_TEXT];
-    [self.datePicker setDatePickerMode:UIDatePickerModeCountDownTimer];
+    [self.pickerView setDatePickerMode:UIDatePickerModeCountDownTimer];
     [self setRightButtonEnabled:NO];
 }
 
@@ -54,18 +61,20 @@
 {
     if ([sender.titleLabel.text isEqualToString:START_TEXT])
     {
+        [self setElapsedSeconds:0];
+        [self startTimer];
         [FISViewController setTitle:CANCEL_TEXT forButton:self.leftButton];
         [FISViewController setTitleColor:CANCEL_COLOR forButton:self.leftButton];
         [self setRightButtonEnabled:YES];
-        [self.pickerView setHidden:YES];
     }
     else if ([sender.titleLabel.text isEqualToString:CANCEL_TEXT])
     {
+        [self stopTimer];
         [FISViewController setTitle:START_TEXT forButton:self.leftButton];
         [FISViewController setTitleColor:START_COLOR forButton:self.leftButton];
         [FISViewController setTitle:PAUSE_TEXT forButton:self.rightButton];
         [self setRightButtonEnabled:NO];
-        [self.pickerView setHidden:NO];
+        [self.pickerSuperview setHidden:NO];
     }
 }
 
@@ -73,10 +82,12 @@
 {
     if ([sender.titleLabel.text isEqualToString:PAUSE_TEXT])
     {
+        [self stopTimer];
         [FISViewController setTitle:PAUSED_TEXT forButton:self.rightButton];
     }
     else if ([sender.titleLabel.text isEqualToString:PAUSED_TEXT])
     {
+        [self startTimer];
         [FISViewController setTitle:PAUSE_TEXT forButton:self.rightButton];
     }
 }
@@ -87,10 +98,32 @@
     [FISViewController setTitleColor:(enabled ? RIGHTBUTTON_ENABLED_COLOR : RIGHTBUTTON_DISABLED_COLOR) forButton:self.rightButton];
 }
 
-- (void)showPickerView:(BOOL)show
+- (void)startTimer
 {
-    [self.pickerView setHidden:!show];
-    if (show) [self.timerLabel setText:DEFAULT_TIMER_TEXT];
+    [self setTimer:[NSTimer timerWithTimeInterval:1.0f target:self selector:@selector(tick) userInfo:nil repeats:YES]];
+    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    [self.timer fire];
+}
+
+- (void)stopTimer
+{
+    [self.timer invalidate];
+}
+
+- (void)tick
+{
+    NSUInteger secondsLeft = self.pickerView.countDownDuration-self.elapsedSeconds;
+    if (secondsLeft <= 0)
+    {
+        [self stopTimer];
+        [self.timerLabel setText:@"DONE"];
+        [self.rightButton setEnabled:NO];
+        return;
+    }
+    
+    [self.timerLabel setText:[FISViewController textForSeconds:secondsLeft]];
+    [self.pickerSuperview setHidden:YES];
+    self.elapsedSeconds++;
 }
 
 + (void)setTitle:(NSString *)title forButton:(UIButton *)button
@@ -105,8 +138,17 @@
 {
     [button setTitleColor:titleColor forState:UIControlStateNormal];
     [button setTitleColor:titleColor forState:UIControlStateFocused];
-//    [button setTitleColor:titleColor forState:UIControlStateSelected];
-//    [button setTitleColor:titleColor forState:UIControlStateHighlighted];
+}
+
++ (NSString *)textForSeconds:(NSUInteger)seconds
+{
+    NSMutableString *text = [NSMutableString string];
+    NSUInteger hours = floorf(seconds/(60.0f*60.0f));
+    if (hours) [text appendFormat:@"%02lu:", hours];
+    float minutes = seconds/60.0f;
+    minutes = floorf(minutes);
+    minutes = (int)minutes % 60;
+    return [text stringByAppendingFormat:@"%02i:%02lu", (int)floorf(seconds/60.0f) % 60, seconds % 60];
 }
 
 @end
