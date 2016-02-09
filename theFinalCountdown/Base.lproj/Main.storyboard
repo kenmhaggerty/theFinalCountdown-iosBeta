@@ -52,10 +52,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e9H-LX-qpR" userLabel="Picker View">
                                 <rect key="frame" x="-1" y="64" width="376" height="302"/>
                                 <subviews>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="C4L-Ct-ROl">
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4L-Ct-ROl">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="476723590.45541298">
-                                            <!--2016-02-09 15:13:10 +0000-->
+                                        <date key="date" timeIntervalSinceReferenceDate="-978267599.54458702">
+                                            <!--1970-01-01 11:00:00 +0000-->
                                         </date>
                                     </datePicker>
                                 </subviews>
@@ -78,8 +78,11 @@
                                             <constraint firstAttribute="height" id="Mgo-x7-PEa"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpp-UI-sOO">
-                                        <rect key="frame" x="101" y="134" width="38" height="33"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpp-UI-sOO">
+                                        <rect key="frame" x="80" y="134" width="80" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="j5g-XL-QXS"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Start">
                                             <color key="titleColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -95,8 +98,8 @@
                                             <constraint firstAttribute="height" id="i7p-FR-dlk"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvC-Q6-to7">
-                                        <rect key="frame" x="232" y="134" width="47" height="33"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvC-Q6-to7">
+                                        <rect key="frame" x="216" y="134" width="80" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Pause">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -128,6 +131,7 @@
                                     <constraint firstItem="kvC-Q6-to7" firstAttribute="centerY" secondItem="KXF-dc-mB2" secondAttribute="centerY" id="l6r-Jh-0FB"/>
                                     <constraint firstItem="Bpp-UI-sOO" firstAttribute="centerX" secondItem="KXF-dc-mB2" secondAttribute="centerX" priority="250" id="lFd-w4-9z6"/>
                                     <constraint firstItem="Bpp-UI-sOO" firstAttribute="centerX" secondItem="HMH-6N-Zo1" secondAttribute="leading" id="lRd-Ek-vH4"/>
+                                    <constraint firstItem="Bpp-UI-sOO" firstAttribute="width" secondItem="kvC-Q6-to7" secondAttribute="width" id="nyM-re-Nrg"/>
                                     <constraint firstItem="xsj-PA-6sf" firstAttribute="centerY" secondItem="KXF-dc-mB2" secondAttribute="centerY" id="uOh-22-uHW"/>
                                     <constraint firstItem="25e-Xg-04m" firstAttribute="leading" secondItem="HMH-6N-Zo1" secondAttribute="trailing" id="xz0-UE-g4v"/>
                                 </constraints>
